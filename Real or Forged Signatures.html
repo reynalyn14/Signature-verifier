@@ -36,14 +36,17 @@
 
         // Load the Teachable Machine model (replace with your actual hosted model URLs)
         async function loadModel() {
-            model = await tmImage.load(
-'https://raw.githubusercontent.com/reynalyn14/Signature-verifier/main/model.json',
-'https://raw.githubusercontent.com/reynalyn14/Signature-verifier/main/metadata.json');
-            console.log("Model loaded successfully!");
-        }
-
-        loadModel();
-
+    try {
+        console.log("Loading model...");
+        model = await tmImage.load(
+            'https://cors-anywhere.herokuapp.com/https://raw.githubusercontent.com/reynalyn14/Signature-verifier/main/model.json',
+            'https://cors-anywhere.herokuapp.com/https://raw.githubusercontent.com/reynalyn14/Signature-verifier/main/metadata.json'
+        );
+        console.log("Model loaded successfully!");
+    } catch (error) {
+        console.error("Error loading the model:", error);
+    }
+}
         // Handle file input and make predictions
         document.getElementById('fileInput').addEventListener('change', async function(event) {
             const file = event.target.files[0];
